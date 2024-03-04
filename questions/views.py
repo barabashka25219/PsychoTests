@@ -2,4 +2,4 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def IndexView(request):
-    return HttpResponse("Questions app start page")
+    return render(request, "questions/index.html")
