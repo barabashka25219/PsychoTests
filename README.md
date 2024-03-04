@@ -3,7 +3,7 @@
 - Ubuntu 23.10 Mantic
 - Conda 24.1.2
 ## Packages
-- python 3.11.0
+- python 3.11.8
 - django 4.1
 - django-bootstrap5
 ## Install
