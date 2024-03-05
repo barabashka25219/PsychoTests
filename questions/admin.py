@@ -19,6 +19,7 @@ class AdminPoll(admin.ModelAdmin):
         (None, {"fields": ["header", "description_text", "passed_poll_num"]})
     ]
 
+    list_display = ["pk", "header", "description_text"]
     inlines = [QuestionInline]
 
 admin.site.register(Question, AdminQuestion)
