@@ -3,5 +3,19 @@
 {% block title %}PsychoTests{% endblock %}
 
 {% block content %}
-
+    <div class="d-flex justify-content-around">
+        {% for poll in polls %}
+            <div class="card m-3 w-50">
+                <div class="card-header">
+                    <h5 class="card-title text-primary">{{poll.header}}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{poll.description_text}}</p>
+                </div>
+                <div class="card-footer">
+                    <a href="#" class="card-link">Пройти &raquo;</a>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}

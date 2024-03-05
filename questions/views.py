@@ -1,5 +1,7 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from .models import Poll
 
 def IndexView(request):
-    return render(request, "questions/index.html")
+    polls = Poll.objects.all()
+    context = {"polls": polls}
+    return render(request, "questions/index.html", context=context)
