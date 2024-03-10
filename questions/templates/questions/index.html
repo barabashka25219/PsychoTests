@@ -13,7 +13,7 @@
                     <p class="card-text">{{poll.description_text}}</p>
                 </div>
                 <div class="card-footer">
-                    <a href="#" class="card-link">Пройти &raquo;</a>
+                    <a href="{% url 'polls:poll' poll.pk %}" class="card-link">Пройти &raquo;</a>
                 </div>
             </div>
         {% endfor %}

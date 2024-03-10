@@ -1,0 +1,14 @@
+{% extends "questions/base.html" %}
+
+{% block title %} {{poll.header}} {% endblock %}
+
+{% block content %}
+    <div class="bg-light rounded p-3 w-75">
+        <h1 class="display-5 text-primary border-bottom border-primary pb-2">{{poll.header}}</h1>
+        <p class="lead">{{poll.description_text}}</p>
+        <p>
+            <span class="text-primary">Вопросов: {{questions_num}}</span>
+        </p>
+        <a class="btn btn-primary">Пройти &raquo;</a>
+    </div>
+{% endblock %}

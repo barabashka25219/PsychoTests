@@ -1,8 +1,10 @@
 from django.urls import path
-from questions.views import IndexView
+from questions.views import IndexView, PollView
 
-app_name = "questions"
+app_name = "polls"
 
 urlpatterns = [
-    path("", IndexView, name="questions"),
+    path("", IndexView, name="polls"),
+    path("<int:pk>/", PollView, name="poll"),
+
 ]
