@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class Person(User):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_core")
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     sex = models.CharField(
         choices = (
             ('M', 'Male'),
