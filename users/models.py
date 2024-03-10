@@ -9,7 +9,8 @@ class Profile(models.Model):
             ('F', 'Female'),
         ),
         max_length=1,
-        blank=True
+        blank=True,
+        help_text='Пол'
     )
     birth_date = models.DateField(blank=True, null=True)
     bio = models.TextField(max_length=800, blank=True)
