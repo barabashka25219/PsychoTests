@@ -12,6 +12,7 @@ class AdminQuestion(admin.ModelAdmin):
         (None, {"fields": ["header", "question_text", "poll"]}),
     ]
 
+    list_display = ["pk", "header", "question_text"]
     inlines = [AnswerInline,]
 
 class AdminPoll(admin.ModelAdmin):
