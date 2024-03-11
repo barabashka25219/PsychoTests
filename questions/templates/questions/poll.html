@@ -9,6 +9,6 @@
         <p>
             <span class="text-primary">Вопросов: {{questions_num}}</span>
         </p>
-        <a class="btn btn-primary">Пройти &raquo;</a>
+        <a href="{% url 'polls:question' first_question.pk %}"class="btn btn-primary">Пройти &raquo;</a>
     </div>
 {% endblock %}

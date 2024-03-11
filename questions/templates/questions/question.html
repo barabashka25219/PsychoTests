@@ -1,0 +1,25 @@
+{% extends "questions/base.html" %}
+
+{% block title %}{{question.header}}{% endblock %}
+
+{% block content %}
+    <div class="bg-light rounded w-75 p-3">
+        <h1 class="display-5 text-primary border-bottom border-primary pb-2">{{question.header}}</h1>
+        <p class="lead">{{question.question_text}}</p>
+
+        <form action="{% url 'polls:question' question.pk %}">
+            {% csrf_token %}
+            {% for answer in answers %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" id="answer-{{answer.pk}}" name="answer">
+                    <label class="form-check-label" for="answer-{{answer.pk}}">{{answer.answer_text}}</label>
+                </div>
+            {% endfor %}
+            
+            <div class="mt-3">
+                <input type="submit" class="btn btn-primary" value="Отправить">
+            </div>
+        </form>
+        
+    </div>
+{% endblock %}
