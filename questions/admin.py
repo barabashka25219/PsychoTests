@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Question, Answer, Poll
+from .models import Question, Answer, Poll, QuestionResult
 
 class AnswerInline(admin.StackedInline):
     model = Answer
@@ -23,5 +23,9 @@ class AdminPoll(admin.ModelAdmin):
     list_display = ["pk", "header", "description_text"]
     inlines = [QuestionInline]
 
+class AdminQuestionResult(admin.ModelAdmin):
+    list_display = ['pk', '__str__']
+
 admin.site.register(Question, AdminQuestion)
 admin.site.register(Poll, AdminPoll)
+admin.site.register(QuestionResult, AdminQuestionResult)

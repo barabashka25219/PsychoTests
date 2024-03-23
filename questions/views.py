@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Poll, Question
+from .models import Poll, Question, QuestionResult, Answer
 from .forms import AnswerForm
 from django.views.decorators.http import require_http_methods, require_GET
 
@@ -26,6 +26,7 @@ def PollView(request, pk):
 
 @require_http_methods(['GET', 'POST'])
 def QuestionView(request, pk):
+    print(request.user.id)
     question = Question.objects.get(pk=pk)
 
     if request.method == 'GET':
@@ -34,7 +35,10 @@ def QuestionView(request, pk):
     else:
         answer_form = AnswerForm(request.POST, question_id=pk)
         if answer_form.is_valid():
-            LOG_DEBUG(QuestionView, "Form is valid")
+            answer_id = request.POST['answers']
+            answer = Answer.objects.get(pk=answer_id)
+            question_result = QuestionResult(question=question, answer=answer)
+            question_result.save()
             return redirect("polls:question", pk=pk+1)
 
     context = {
