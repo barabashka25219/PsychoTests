@@ -12,7 +12,7 @@ class AdminQuestion(admin.ModelAdmin):
         (None, {"fields": ["header", "question_text", "poll"]}),
     ]
 
-    list_display = ["pk", "header", "question_text"]
+    list_display = ["number_in_poll", "header", "question_text"]
     inlines = [AnswerInline,]
 
 class AdminPoll(admin.ModelAdmin):
@@ -24,7 +24,7 @@ class AdminPoll(admin.ModelAdmin):
     inlines = [QuestionInline]
 
 class AdminQuestionResult(admin.ModelAdmin):
-    list_display = ['pk', '__str__']
+    list_display = ['pk', '__str__', 'user']
 
 admin.site.register(Question, AdminQuestion)
 admin.site.register(Poll, AdminPoll)

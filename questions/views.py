@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import Http404
 from .models import Poll, Question, QuestionResult, Answer
 from .forms import AnswerForm
 from django.views.decorators.http import require_http_methods, require_GET
@@ -15,8 +16,12 @@ def IndexView(request):
 @require_GET
 def PollView(request, pk):
     poll = Poll.objects.get(pk=pk)
-    first_question = poll.question_set.all()[0]
-    print(first_question)
+    
+    try:
+        first_question = poll.question_set.all().order_by('number_in_poll')[0:1].get()
+    except Question.DoesNotExist:
+        raise Http404
+
     context = {
         "poll": poll,
         "first_question": first_question,
@@ -26,7 +31,6 @@ def PollView(request, pk):
 
 @require_http_methods(['GET', 'POST'])
 def QuestionView(request, pk):
-    print(request.user.id)
     question = Question.objects.get(pk=pk)
 
     if request.method == 'GET':

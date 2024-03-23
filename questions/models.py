@@ -13,6 +13,7 @@ class Question(models.Model):
     header = models.CharField(max_length=80)
     question_text = models.TextField(max_length=200)
     poll = models.ManyToManyField(Poll)
+    number_in_poll = models.PositiveIntegerField()
 
     def __str__(self):
         if len(self.header) > 50:
@@ -29,7 +30,7 @@ class Answer(models.Model):
 class QuestionResult(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return f'{self.question.header}: {self.answer.answer_text}'
