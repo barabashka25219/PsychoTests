@@ -48,7 +48,12 @@ class AdminPoll(admin.ModelAdmin):
     inlines = [QuestionInline]
 
 class AdminQuestionResult(admin.ModelAdmin):
-    list_display = ['pk', '__str__', 'user']
+    list_display = [
+        'get_poll',
+        'get_question_header',
+        'answer',
+        'user',
+    ]
 
 admin.site.register(Question, AdminQuestion)
 admin.site.register(Poll, AdminPoll)

@@ -37,5 +37,13 @@ class QuestionResult(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
+    @admin.display(description='Poll')
+    def get_poll(self):
+        return self.question.poll.get()
+    
+    @admin.display(description='Question')
+    def get_question_header(self):
+        return self.question.header
+
     def __str__(self):
         return f'{self.question.header}: {self.answer.answer_text}'
