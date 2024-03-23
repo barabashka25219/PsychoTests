@@ -43,7 +43,14 @@ def QuestionView(request, pk):
             answer = Answer.objects.get(pk=answer_id)
             question_result = QuestionResult(question=question, answer=answer)
             question_result.save()
-            return redirect("polls:question", pk=pk+1)
+            
+            # If it's last question then render end template
+            if question.number_in_poll == len(Question.objects.all()) - 1:
+                return render(request, 'questions/poll_end.html', context={'poll': question.poll.get()})
+            
+            next_question = Question.objects.get(number_in_poll=question.number_in_poll+1)
+            
+            return redirect("polls:question", pk=next_question.pk)
 
     context = {
             "question": question,

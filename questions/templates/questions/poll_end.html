@@ -1,0 +1,15 @@
+{% extends "questions/base.html" %}
+
+{% block title %}
+    "{{poll.header}}"
+{% endblock %}
+
+{% block content %}
+    <div class="bg-light rounded w-75 p-3">
+        <h1 class="display=5">
+            Спасибо за прохождение опроса "{{poll.header}}"! :)
+        </h1>
+
+        <a href="{% url 'polls:polls' %}" class="btn btn-primary mt-2">На главную</a>
+    </div>
+{% endblock %}

@@ -9,7 +9,7 @@ class QuestionInline(admin.StackedInline):
 
 class AdminQuestion(admin.ModelAdmin):
     fieldsets = [
-        (None, {"fields": ["header", "question_text", "poll"]}),
+        (None, {"fields": ["number_in_poll", "header", "question_text", "poll"]}),
     ]
 
     list_display = ["number_in_poll", "header", "question_text"]
