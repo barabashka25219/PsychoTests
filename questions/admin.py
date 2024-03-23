@@ -44,8 +44,14 @@ class AdminPoll(admin.ModelAdmin):
         (None, {"fields": ["header", "description_text", "passed_poll_num"]})
     ]
 
-    list_display = ["pk", "header", "description_text"]
+    list_display = [
+        "header", 
+        "get_passed_poll_num", 
+        'get_questions_number',
+    ]
+
     inlines = [QuestionInline]
+
 
 class AdminQuestionResult(admin.ModelAdmin):
     list_display = [

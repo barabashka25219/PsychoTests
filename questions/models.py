@@ -7,6 +7,14 @@ class Poll(models.Model):
     description_text = models.TextField(max_length=1000)
     passed_poll_num = models.IntegerField()
 
+    @admin.display(description='Questions')
+    def get_questions_number(self):
+        return len(self.question_set.all())
+    
+    @admin.display(description='Completed by users')
+    def get_passed_poll_num(self):
+        return self.passed_poll_num
+
     def __str__(self):
         return self.header
 
