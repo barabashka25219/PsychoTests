@@ -41,7 +41,14 @@ def QuestionView(request, pk):
         if answer_form.is_valid():
             answer_id = request.POST['answers']
             answer = Answer.objects.get(pk=answer_id)
-            question_result = QuestionResult(question=question, answer=answer)
+            
+            # Find exist result if user has completed the poll earlier
+            try:
+                question_result = QuestionResult.objects.filter(user=request.user).get(question=question)
+                question_result.answer = answer
+            except QuestionResult.DoesNotExist:
+                question_result = QuestionResult(question=question, answer=answer, user=request.user)
+            
             question_result.save()
             
             # If it's last question then render end template
