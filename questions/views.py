@@ -3,6 +3,7 @@ from django.http import Http404
 from .models import Poll, Question, QuestionResult, Answer
 from .forms import AnswerForm
 from django.views.decorators.http import require_http_methods, require_GET
+from django.contrib.auth.decorators import login_required
 
 def LOG_DEBUG(func, message):
     print(f'[DEBUG] {func.__name__}: {message}')
@@ -29,9 +30,15 @@ def PollView(request, pk):
     }
     return render(request, "questions/poll.html", context)
 
+@login_required
 @require_http_methods(['GET', 'POST'])
 def QuestionView(request, pk):
     question = Question.objects.get(pk=pk)
+    poll = question.poll.get()
+    all_questions_number = len(
+        Question.objects.filter(
+            poll=question.poll.get())
+    ) - 1
 
     if request.method == 'GET':
         answer_form = AnswerForm(question_id=pk)
@@ -44,23 +51,38 @@ def QuestionView(request, pk):
             
             # Find exist result if user has completed the poll earlier
             try:
-                question_result = QuestionResult.objects.filter(user=request.user).get(question=question)
+                question_result = QuestionResult.objects.filter(
+                    user=request.user
+                ).get(question=question)
+
                 question_result.answer = answer
+
             except QuestionResult.DoesNotExist:
                 question_result = QuestionResult(question=question, answer=answer, user=request.user)
             
             question_result.save()
             
             # If it's last question then render end template
-            if question.number_in_poll == len(Question.objects.all()) - 1:
-                return render(request, 'questions/poll_end.html', context={'poll': question.poll.get()})
+            if question.number_in_poll == all_questions_number:
+                return render(
+                    request, 
+                    'questions/poll_end.html', 
+                    context={'poll': poll}
+                )
             
-            next_question = Question.objects.get(number_in_poll=question.number_in_poll+1)
+            next_question = Question.objects.filter(
+                poll=poll
+            ).get(
+                number_in_poll = question.number_in_poll + 1
+            )
             
             return redirect("polls:question", pk=next_question.pk)
-
-    context = {
+ 
+    return render(
+        request, 
+        "questions/question.html", 
+        context={
             "question": question,
             "answer_form": answer_form,
-        }   
-    return render(request, "questions/question.html", context=context)
+        }
+    )

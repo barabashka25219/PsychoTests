@@ -12,8 +12,11 @@
         <form action="{% url 'polls:question' question.pk %}" method="post">
             {% csrf_token %}
             {% bootstrap_form answer_form %}
-            <input type="submit" value="Подтвердить">
+            <div class="d-flex justify-content-around">
+                <a href="javascript:history.back()" class="btn btn-primary w-25">&laquo; Предыдущий вопрос</a>
+                <input type="submit" class="btn btn-success w-25" value="Следующий вопрос &raquo">
+            </div>
         </form>
-        
     </div>
+    
 {% endblock %}

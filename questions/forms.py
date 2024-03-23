@@ -3,7 +3,7 @@ from django import forms
 from questions.models import Question
 
 class AnswerForm(forms.Form):
-    answers = forms.ModelChoiceField(queryset=None, widget=forms.RadioSelect)
+    answers = forms.ModelChoiceField(queryset=None, widget=forms.RadioSelect, label='')
 
     def __init__(self, *args, **kwargs):
         if 'question_id' in kwargs and kwargs['question_id'] is not None:
