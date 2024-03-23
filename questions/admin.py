@@ -1,16 +1,41 @@
 from django.contrib import admin
 from .models import Question, Answer, Poll, QuestionResult
 
-class AnswerInline(admin.StackedInline):
+class AnswerInline(admin.TabularInline):
     model = Answer
+    extra = 0
 
-class QuestionInline(admin.StackedInline):
+    fieldsets = [
+        (
+            "Answer",
+            {
+                "fields": ["answer_text",],
+            }
+        )
+    ]
+
+class QuestionInline(admin.TabularInline):
     model = Question.poll.through
+
+    related_name = "question"
+    
+    fieldsets = [
+        (
+            None,
+            {
+                "fields": ["question",]
+            }
+        )
+    ]
+
+    verbose_name_plural = "Questions"
+    verbose_name = "Question"
+    extra = 0
 
 class AdminQuestion(admin.ModelAdmin):
     fieldsets = [
         (
-            None, 
+            "Question", 
             {
                 "fields": ["number_in_poll", "header", "question_text", "poll"]
             }
@@ -51,7 +76,6 @@ class AdminPoll(admin.ModelAdmin):
     ]
 
     inlines = [QuestionInline]
-
 
 class AdminQuestionResult(admin.ModelAdmin):
     list_display = [
