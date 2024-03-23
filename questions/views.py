@@ -65,6 +65,9 @@ def QuestionView(request, pk):
             
             # If it's last question then render end template
             if question.number_in_poll == all_questions_number:
+                poll.passed_poll_num += 1
+                poll.save()
+
                 return render(
                     request, 
                     'questions/poll_end.html', 
