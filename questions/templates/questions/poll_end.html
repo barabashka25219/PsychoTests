@@ -10,6 +10,8 @@
             Спасибо за прохождение опроса "{{poll.header}}"! :)
         </h1>
 
-        <a href="{% url 'polls:polls' %}" class="btn btn-primary mt-2">На главную</a>
+        <div class="d-flex justify-content-center">
+            <a href="{% url 'polls:polls' %}" class="btn btn-primary mt-2">На главную</a>
+        </div>
     </div>
 {% endblock %}

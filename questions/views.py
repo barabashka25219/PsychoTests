@@ -45,6 +45,7 @@ def QuestionView(request, pk):
         
     else:
         answer_form = AnswerForm(request.POST, question_id=pk)
+
         if answer_form.is_valid():
             answer_id = request.POST['answers']
             answer = Answer.objects.get(pk=answer_id)
@@ -84,5 +85,6 @@ def QuestionView(request, pk):
         context={
             "question": question,
             "answer_form": answer_form,
+            "last_question_num": all_questions_number,
         }
     )

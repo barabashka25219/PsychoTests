@@ -13,8 +13,22 @@
             {% csrf_token %}
             {% bootstrap_form answer_form %}
             <div class="d-flex justify-content-around">
-                <a href="javascript:history.back()" class="btn btn-primary w-25">&laquo; Предыдущий вопрос</a>
-                <input type="submit" class="btn btn-success w-25" value="Следующий вопрос &raquo">
+                <a href="javascript:history.back()" class="btn btn-primary w-25">
+                    &laquo;
+
+                    {% if question.number_in_poll == 0 %}
+                        Назад
+                    {% else %}
+                        Предыдущий вопрос
+                    {% endif %}
+                </a>
+
+                <input type="submit" class="btn btn-success w-25" 
+                {% if question.number_in_poll == last_question_num %}
+                    value="Закончить опрос"
+                {% else %}
+                    value="Следующий вопрос &raquo"
+                {% endif %} >
             </div>
         </form>
     </div>
