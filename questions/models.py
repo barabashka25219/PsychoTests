@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib import admin
 
 class Poll(models.Model):
     header = models.CharField(max_length=80)
@@ -14,6 +15,10 @@ class Question(models.Model):
     question_text = models.TextField(max_length=200)
     poll = models.ManyToManyField(Poll)
     number_in_poll = models.PositiveIntegerField()
+
+    @admin.display(description='Poll')
+    def get_poll(self):
+        return self.poll.get()
 
     def __str__(self):
         if len(self.header) > 50:

@@ -9,10 +9,34 @@ class QuestionInline(admin.StackedInline):
 
 class AdminQuestion(admin.ModelAdmin):
     fieldsets = [
-        (None, {"fields": ["number_in_poll", "header", "question_text", "poll"]}),
+        (
+            None, 
+            {
+                "fields": ["number_in_poll", "header", "question_text", "poll"]
+            }
+        ),
     ]
 
-    list_display = ["number_in_poll", "header", "question_text"]
+    list_display = [
+        "get_poll", 
+        "get_number", 
+        "get_header", 
+        "get_question_text"
+    ]
+
+    def get_number(self, obj):
+        return obj.number_in_poll
+    
+    def get_header(self, obj):
+        return obj.header
+    
+    def get_question_text(self, obj):
+        return obj.question_text
+    
+    get_header.short_description = 'Question'
+    get_number.short_description = 'Number'
+    get_question_text.short_description = 'Content'
+
     inlines = [AnswerInline,]
 
 class AdminPoll(admin.ModelAdmin):
