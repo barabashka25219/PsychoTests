@@ -5,7 +5,7 @@
 {% block title %}{{question.header}}{% endblock %}
 
 {% block content %}
-    <div class="bg-light rounded w-75 p-3">
+    <div class="bg-light rounded p-3">
         <h1 class="display-5 text-primary border-bottom border-primary pb-2">{{question.header}}</h1>
         <p class="lead">{{question.question_text}}</p>
 
@@ -13,7 +13,7 @@
             {% csrf_token %}
             {% bootstrap_form answer_form %}
             <div class="d-flex justify-content-around">
-                <a href="javascript:history.back()" class="btn btn-primary w-25">
+                <a href="javascript:history.back()" class="btn btn-primary mr-2">
                     &laquo;
 
                     {% if question.number_in_poll == 0 %}
@@ -23,7 +23,7 @@
                     {% endif %}
                 </a>
 
-                <input type="submit" class="btn btn-success w-25" 
+                <input type="submit" class="btn btn-success" 
                     {% if question.number_in_poll == last_question_num %}
                         value="Закончить опрос"
                     {% else %}

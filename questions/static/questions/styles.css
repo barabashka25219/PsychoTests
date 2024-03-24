@@ -1,4 +1,5 @@
 body {
     background:url("images/background.png") no-repeat;
     background-size: cover;
+    background-attachment: local;
 }

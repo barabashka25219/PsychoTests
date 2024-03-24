@@ -5,7 +5,7 @@
 {% block title %}Log-In{% endblock %}
 
 {% block content %}
-    <div class="bg-light rounded w-75 p-3">
+    <div class="bg-light rounded p-3">
         <h1 class="display-5 text-primary border-bottom border-primary pb-2">Please, Login</h1>
         <form action="{% url 'users:login_user' %}" method="post">
             {% csrf_token %}
@@ -13,8 +13,8 @@
             {% bootstrap_form login_form %}
 
             <div class="d-flex justify-content-around">
-                <input type="submit" class="btn btn-success w-25" value="LogIn">
-                <a href="{% url 'users:create_user' %}" class="btn btn-primary w-25">Register</a>
+                <input type="submit" class="btn btn-success" value="LogIn">
+                <a href="{% url 'users:create_user' %}" class="btn btn-primary">Register</a>
             </div>
         </form>
     </div>
