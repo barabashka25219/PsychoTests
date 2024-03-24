@@ -24,11 +24,12 @@
                 </a>
 
                 <input type="submit" class="btn btn-success w-25" 
-                {% if question.number_in_poll == last_question_num %}
-                    value="Закончить опрос"
-                {% else %}
-                    value="Следующий вопрос &raquo"
-                {% endif %} >
+                    {% if question.number_in_poll == last_question_num %}
+                        value="Закончить опрос"
+                    {% else %}
+                        value="Следующий вопрос &raquo"
+                    {% endif %}
+                >
             </div>
         </form>
     </div>
