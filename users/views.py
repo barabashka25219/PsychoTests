@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
-from .forms import ProfileForm, UserCreationForm
+from .forms import ProfileForm, UserCreationForm, UserLoginForm
 from django.views.decorators.http import require_http_methods
+from django.contrib.auth import authenticate, login
 
 @require_http_methods(['GET', 'POST'])
 def CreateUserView(request):
@@ -19,6 +20,8 @@ def CreateUserView(request):
             user_profile.user = user
             user_profile.save()
 
+            login(request, user)
+
             return redirect("polls:polls")
     
     return render(
@@ -29,3 +32,29 @@ def CreateUserView(request):
                 "profile_form": user_profile_form
             }
         )
+
+@require_http_methods(['GET', 'POST'])
+def LoginUserView(request):
+    if request.method == 'GET':
+        login_form = UserLoginForm()
+    
+    else:
+        login_form = UserLoginForm(request.POST)
+        
+        if login_form.is_valid():
+            username = login_form.cleaned_data['username']
+            password = login_form.cleaned_data['password']
+
+            user = authenticate(username=username, password=password)
+
+            if user is not None:
+                login(request, user)
+                return redirect('polls:polls')
+            
+    return render(
+        request,
+        'users/login.html',
+        context={
+            'login_form': login_form,
+        }
+    )
