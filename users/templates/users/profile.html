@@ -1,0 +1,18 @@
+{% extends 'questions/base.html' %}
+
+{% load bootstrap5 %}
+
+{% block title %}Profile {{request.user.username}}{% endblock %}
+
+{% block content %}
+    <div class="bg-light rounded p-3">
+        <form action="{% url 'users:user_profile' %}" method="post">
+            {% csrf_token %}
+            {% bootstrap_form profile_form %}
+
+            <div class="d-flex justify-content-around">
+                <input type="submit" class="btn btn-success" value="Изменить">
+            </div>
+        </form>
+    </div>
+{% endblock %}
