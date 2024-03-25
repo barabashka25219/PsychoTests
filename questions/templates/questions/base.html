@@ -24,8 +24,17 @@
             <div class="collapse navbar-collapse" id="nav-content">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a href="{% url 'users:login_user' %}" class="nav-link">Login</a>
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'users:user_logout' %}" class="nav-link">Logout</a>
+                        {% else %}
+                            <a href="{% url 'users:login_user' %}" class="nav-link">Login</a>  
+                        {% endif %}
                     </li>
+                    {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a href="{% url 'users:user_profile' %}" class="nav-link">Profile</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

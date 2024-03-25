@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from .forms import ProfileForm, UserCreationForm, UserLoginForm
 from django.views.decorators.http import require_http_methods
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from users.models import Profile
 
@@ -70,3 +70,9 @@ def ProfileView(request):
     return render(request, 'users/profile.html', context={
         'profile_form': profile_form,
     })
+
+@require_http_methods(['GET'])
+@login_required
+def LogoutView(request):
+    logout(request)
+    return redirect('polls:polls')
