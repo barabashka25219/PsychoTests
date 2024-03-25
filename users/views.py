@@ -65,8 +65,15 @@ def LoginUserView(request):
 @login_required
 def ProfileView(request):
     profile = Profile.objects.get(user=request.user)
-    profile_form = ProfileForm(instance=profile)
-    
+
+    if request.method == 'GET':
+        profile_form = ProfileForm(instance=profile)
+    else:
+        profile_form = ProfileForm(request.POST, instance=profile)
+        
+        if profile_form.is_valid():
+            profile_form.save()
+            
     return render(request, 'users/profile.html', context={
         'profile_form': profile_form,
     })
