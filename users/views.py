@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from .forms import ProfileForm, UserCreationForm, UserLoginForm
 from django.views.decorators.http import require_http_methods
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+from users.models import Profile
 
 @require_http_methods(['GET', 'POST'])
 def CreateUserView(request):
@@ -58,3 +60,13 @@ def LoginUserView(request):
             'login_form': login_form,
         }
     )
+
+@require_http_methods(['GET', 'POST'])
+@login_required
+def ProfileView(request):
+    profile = Profile.objects.get(user=request.user)
+    profile_form = ProfileForm(instance=profile)
+    
+    return render(request, 'users/profile.html', context={
+        'profile_form': profile_form,
+    })
