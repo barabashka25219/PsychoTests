@@ -2,6 +2,7 @@ from .models import Profile
 from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from django import forms
 from django.db import models
 
@@ -32,3 +33,20 @@ class UserCreationForm(UserCreationForm):
 class UserLoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)
+
+    def clean(self):
+        username = self.cleaned_data.get('username')
+        password = self.cleaned_data.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user is None:
+            self.add_error('username', '')
+            self.add_error('password', '')
+
+            raise forms.ValidationError(
+                message='Invalid login or password',
+                code='auth_fail',
+            )
+        
+        return self.cleaned_data

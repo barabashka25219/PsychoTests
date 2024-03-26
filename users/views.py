@@ -73,7 +73,7 @@ def ProfileView(request):
         
         if profile_form.is_valid():
             profile_form.save()
-            
+
     return render(request, 'users/profile.html', context={
         'profile_form': profile_form,
     })
