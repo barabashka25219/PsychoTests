@@ -6,6 +6,7 @@ class Poll(models.Model):
     header = models.CharField(max_length=80)
     description_text = models.TextField(max_length=1000)
     passed_poll_num = models.IntegerField()
+    image_poll = models.FileField(blank=True, null=True)
 
     @admin.display(description='Questions')
     def get_questions_number(self):
