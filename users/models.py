@@ -14,3 +14,4 @@ class Profile(models.Model):
     )
     birth_date = models.DateField(blank=True, null=True)
     bio = models.TextField(max_length=800, blank=True)
+    avatar = models.FileField(null=True, blank=True)

@@ -9,7 +9,7 @@ from django.db import models
 class ProfileForm(ModelForm):
     class Meta:
         model = Profile
-        fields = ['sex', 'birth_date', 'bio']
+        fields = ['sex', 'birth_date', 'bio', 'avatar']
         widgets = {
             'birth_date': forms.widgets.DateInput(
                 attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)', 'class': 'form-control'}
@@ -46,7 +46,6 @@ class UserLoginForm(forms.Form):
 
             raise forms.ValidationError(
                 message='Invalid login or password',
-                code='auth_fail',
             )
         
         return self.cleaned_data
