@@ -7,7 +7,7 @@ dependencies:
   - _openmp_mutex=5.1=1_gnu
   - asgiref=3.5.2=py311h06a4308_0
   - bzip2=1.0.8=h5eee18b_5
-  - ca-certificates=2023.12.12=h06a4308_0
+  - ca-certificates=2024.3.11=h06a4308_0
   - django=4.1=py311h06a4308_0
   - django-bootstrap5=23.4=pyhd8ed1ab_0
   - freetype=2.12.1=h4a9f257_0
@@ -41,4 +41,8 @@ dependencies:
   - xz=5.4.6=h5eee18b_0
   - zlib=1.2.13=h5eee18b_0
   - zstd=1.5.5=hc292b87_0
+  - pip:
+      - beautifulsoup4==4.12.3
+      - django-bootstrap-v5==1.0.11
+      - soupsieve==2.5
 prefix: /home/user/miniconda3/envs/Psycho
