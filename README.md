@@ -1,4 +1,5 @@
 # PsychoTests
+![Preview](polls_preview.png)
 ## System
 - Ubuntu 23.10 Mantic
 - Conda 24.1.2

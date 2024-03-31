@@ -12,36 +12,38 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
-<body style="height:100%;">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="height:5rem;">
         <div class="container-fluid">
-            <a href="{% url 'polls:polls' %}" class="navbar-brand">Polls</a>
+            <a href="{% url 'polls:polls' %}" class="navbar-brand">Опросник</a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" 
+            data-toggle="collapse" data-target="#nav-content" 
+            aria-controls="nav-content" aria-expanded="false" 
+            aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="nav-content">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+                    <li class="nav-item" style="font-size:auto;">
                         {% if user.is_authenticated %}
-                            <a href="{% url 'users:user_logout' %}" class="nav-link">Logout</a>
+                            <a href="{% url 'users:user_logout' %}" class="nav-link">Выйти</a>
                         {% else %}
-                            <a href="{% url 'users:login_user' %}" class="nav-link">Login</a>  
+                            <a href="{% url 'users:login_user' %}" class="nav-link">Войти</a>  
                         {% endif %}
                     </li>
                     {% if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a href="{% url 'users:user_profile' %}" class="nav-link">Profile</a>
+                        <li class="nav-item" style="font-size:auto;">
+                            <a href="{% url 'users:user_profile' %}" class="nav-link">Профиль</a>
                         </li>
                     {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
-    <div class="d-flex flex-column justify-content-center p-2" style="min-height:100%;">
+    <div class="d-flex justify-content-center m-2">
         {% block content %} {% endblock %}
-    </div>
-        
+    </div>        
 </body>
 </html>

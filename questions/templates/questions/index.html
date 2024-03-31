@@ -6,6 +6,8 @@
     <div class="d-flex flex-wrap justify-content-center">
         {% for poll in polls %}
             <div class="card m-3" style="width:25rem;">
+                <img src="{{poll.image_poll.url}}" class="card-img-top" style="max-height:14rem;">
+                
                 <div class="card-header">
                     <h5 class="card-title text-primary">{{poll.header}}</h5>
                 </div>

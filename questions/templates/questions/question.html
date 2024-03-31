@@ -5,15 +5,15 @@
 {% block title %}{{question.header}}{% endblock %}
 
 {% block content %}
-    <div class="bg-light rounded p-3">
+    <div class="d-flex flex-column bg-light rounded p-3">
         <h1 class="display-5 text-primary border-bottom border-primary pb-2">{{question.header}}</h1>
-        <p class="lead">{{question.question_text}}</p>
+        <p class="lead" style="font-size:2rem;">{{question.question_text}}</p>
 
         <form action="{% url 'polls:question' question.pk %}" method="post">
             {% csrf_token %}
             {% bootstrap_form answer_form %}
             <div class="d-flex justify-content-around">
-                <a href="javascript:history.back()" class="btn btn-primary mr-2">
+                <a href="javascript:history.back()" class="btn btn-primary mr-2 p-3 me-1 w-50">
                     &laquo;
 
                     {% if question.number_in_poll == 0 %}
@@ -23,7 +23,7 @@
                     {% endif %}
                 </a>
 
-                <input type="submit" class="btn btn-success" 
+                <input type="submit" class="btn btn-success p-2 w-50" 
                     {% if question.number_in_poll == last_question_num %}
                         value="Закончить опрос"
                     {% else %}

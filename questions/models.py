@@ -8,10 +8,10 @@ import shutil
 import os.path
 
 def image_path(instance, filename):
-        """ 
-        Get file path for 'upload_to' argument
-        """
-        return f'{instance.__class__.__name__}/{instance.user_id}/{filename}'
+    """ 
+    Get file path for 'upload_to' argument
+    """
+    return f'{instance.__class__.__name__}/{instance.id}/{filename}'
 
 class Poll(models.Model):
     header = models.CharField(max_length=80)
