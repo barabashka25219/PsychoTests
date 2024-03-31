@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
+from django.db.models.signals import pre_delete
+from django.dispatch.dispatcher import receiver
+from PsychoTestProject import settings
+import shutil
+import os.path
 
 def image_path(instance, filename):
         """ 
@@ -24,6 +29,27 @@ class Poll(models.Model):
 
     def __str__(self):
         return self.header
+    
+
+# Remove folder by django signals
+@receiver(pre_delete, sender=Poll)
+def profile_folder_delete(sender, instance, **kwargs):
+    instance.avatar.delete(save=False)
+
+    # media/Profile/user_id
+    profile_folder = os.path.join(
+        settings.MEDIA_ROOT,
+        instance.__class__.__name__,
+        str(instance.user_id)
+    )
+
+    print(f'Remove profile directory: {profile_folder}')
+
+    try:
+        shutil.rmtree(profile_folder)
+    except FileNotFoundError:
+        pass
+
 
 class Question(models.Model):
     header = models.CharField(max_length=80)
