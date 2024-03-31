@@ -4,6 +4,6 @@ from django.contrib.auth.models import User
 from .models import Profile
 
 class AdminProfile(admin.ModelAdmin):
-    list_display = ['user', 'sex', 'birth_date', 'bio']
+    list_display = ['user', 'sex', 'birth_date', 'bio', 'avatar']
 
 admin.site.register(Profile, AdminProfile)

@@ -2,11 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib import admin
 
+def image_path(instance, filename):
+        """ 
+        Get file path for 'upload_to' argument
+        """
+        print('#########################')
+        print(dir(instance))
+        print('save to' + f' {instance.__class__.__name__}/{instance.id}/${filename}')
+        return f'{instance.__class__.__name__}/{instance.id}/{filename}'
+
 class Poll(models.Model):
     header = models.CharField(max_length=80)
     description_text = models.TextField(max_length=1000)
     passed_poll_num = models.IntegerField()
-    image_poll = models.FileField(blank=True, null=True)
+    image_poll = models.FileField(blank=True, null=True, upload_to=image_path)
 
     @admin.display(description='Questions')
     def get_questions_number(self):

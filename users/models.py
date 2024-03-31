@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from questions.models import image_path
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -14,4 +15,4 @@ class Profile(models.Model):
     )
     birth_date = models.DateField(blank=True, null=True)
     bio = models.TextField(max_length=800, blank=True)
-    avatar = models.FileField(null=True, blank=True)
+    avatar = models.FileField(null=True, blank=True, upload_to=image_path)

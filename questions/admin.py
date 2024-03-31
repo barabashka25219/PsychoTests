@@ -66,7 +66,7 @@ class AdminQuestion(admin.ModelAdmin):
 
 class AdminPoll(admin.ModelAdmin):
     fieldsets = [
-        (None, {"fields": ["header", "description_text", "passed_poll_num"]})
+        (None, {"fields": ["header", "description_text", "passed_poll_num", "image_poll"]})
     ]
 
     list_display = [
