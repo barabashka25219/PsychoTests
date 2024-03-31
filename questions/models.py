@@ -6,10 +6,7 @@ def image_path(instance, filename):
         """ 
         Get file path for 'upload_to' argument
         """
-        print('#########################')
-        print(dir(instance))
-        print('save to' + f' {instance.__class__.__name__}/{instance.id}/${filename}')
-        return f'{instance.__class__.__name__}/{instance.id}/{filename}'
+        return f'{instance.__class__.__name__}/{instance.user_id}/{filename}'
 
 class Poll(models.Model):
     header = models.CharField(max_length=80)

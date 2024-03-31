@@ -6,7 +6,7 @@
 
 {% block content %}
     <p>
-        <form method="post" action="{% url 'users:create_user' %}" class="bg-light p-3 rounded">
+        <form method="post" action="{% url 'users:create_user' %}" enctype="multipart/form-data" class="bg-light p-3 rounded">
             <h1 class="display-5">Регистрация</h1>
             {% csrf_token %}
             <fieldset id="user_form">

@@ -14,7 +14,7 @@ def CreateUserView(request):
     
     else:
         user_auth_form = UserCreationForm(request.POST)
-        user_profile_form = ProfileForm(request.POST)
+        user_profile_form = ProfileForm(request.POST, request.FILES)
 
         if user_auth_form.is_valid() and user_profile_form.is_valid():
             user = user_auth_form.save()
@@ -69,7 +69,7 @@ def ProfileView(request):
     if request.method == 'GET':
         profile_form = ProfileForm(instance=profile)
     else:
-        profile_form = ProfileForm(request.POST, instance=profile)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=profile)
         
         if profile_form.is_valid():
             profile_form.save()

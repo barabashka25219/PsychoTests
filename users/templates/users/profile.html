@@ -6,7 +6,7 @@
 
 {% block content %}
     <div class="bg-light rounded p-3">
-        <form action="{% url 'users:user_profile' %}" method="post">
+        <form action="{% url 'users:user_profile' %}" enctype="multipart/form-data" method="post">
             {% csrf_token %}
             {% bootstrap_form profile_form %}
 
