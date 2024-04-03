@@ -1,4 +1,4 @@
-# PsychoTests
+# Social polls
 ![Preview](polls_preview.png)
 This is learning Django project. It can create any social polls (including questions and answers) at web interface of administrator.
 ## System
