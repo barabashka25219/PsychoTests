@@ -13,10 +13,12 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary" style="height:5rem;">
-        <div class="container-fluid">
-            <a href="{% url 'polls:polls' %}" class="navbar-brand">Опросник</a>
-
+    <nav class="navbar navbar-expand-md navbar-dark bg-primary p-0">
+        <div class="container-fluid p-0">
+            <a href="{% url 'polls:polls' %}" class="navbar-brand p-0">
+                <img src="{% static 'logo.jpg' %}" class="rounded-pill" alt="logo" style="height:5rem;">
+            </a>
+        
             <button class="navbar-toggler" type="button" 
             data-toggle="collapse" data-target="#nav-content" 
             aria-controls="nav-content" aria-expanded="false" 
@@ -24,8 +26,8 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse" id="nav-content">
-                <ul class="navbar-nav ms-auto">
+            <div class="collapse navbar-collapse me-3" id="nav-content">
+                <ul class="navbar-nav align-items-center ms-auto">
                     <li class="nav-item" style="font-size:auto;">
                         {% if user.is_authenticated %}
                             <a href="{% url 'users:user_logout' %}" class="nav-link">Выйти</a>
